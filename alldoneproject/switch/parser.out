@@ -1,0 +1,394 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    MINUS
+    PLUS
+
+Grammar
+
+Rule 0     S' -> switch_statement
+Rule 1     switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE
+Rule 2     case_statements -> case_statement case_statements
+Rule 3     case_statements -> empty
+Rule 4     case_statement -> CASE CONSTANT COLON statements
+Rule 5     statements -> statement statements
+Rule 6     statements -> empty
+Rule 7     statement -> BREAK SEMICOLON
+Rule 8     statement -> other_statements
+Rule 9     other_statements -> CONSTANT SEMICOLON
+Rule 10    other_statements -> expression SEMICOLON
+Rule 11    expression -> NUMBER
+Rule 12    expression -> BOOLEAN
+Rule 13    expression -> ID
+Rule 14    empty -> <empty>
+
+Terminals, with rules where they appear
+
+BOOLEAN              : 12
+BREAK                : 7
+CASE                 : 4
+COLON                : 1 4
+CONSTANT             : 1 4 9
+DEFAULT              : 1
+ID                   : 13
+LBRACE               : 1
+LPAREN               : 1
+MINUS                : 
+NUMBER               : 11
+PLUS                 : 
+RBRACE               : 1
+RPAREN               : 1
+SEMICOLON            : 7 9 10
+SWITCH               : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+case_statement       : 2
+case_statements      : 1 2
+empty                : 3 6
+expression           : 10
+other_statements     : 8
+statement            : 5
+statements           : 1 4 5
+switch_statement     : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . switch_statement
+    (1) switch_statement -> . SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE
+
+    SWITCH          shift and go to state 2
+
+    switch_statement               shift and go to state 1
+
+state 1
+
+    (0) S' -> switch_statement .
+
+
+
+state 2
+
+    (1) switch_statement -> SWITCH . LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE
+
+    LPAREN          shift and go to state 3
+
+
+state 3
+
+    (1) switch_statement -> SWITCH LPAREN . CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE
+
+    CONSTANT        shift and go to state 4
+
+
+state 4
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT . RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE
+
+    RPAREN          shift and go to state 5
+
+
+state 5
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN . LBRACE case_statements DEFAULT COLON statements RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE . case_statements DEFAULT COLON statements RBRACE
+    (2) case_statements -> . case_statement case_statements
+    (3) case_statements -> . empty
+    (4) case_statement -> . CASE CONSTANT COLON statements
+    (14) empty -> .
+
+    CASE            shift and go to state 10
+    DEFAULT         reduce using rule 14 (empty -> .)
+
+    case_statements                shift and go to state 7
+    case_statement                 shift and go to state 8
+    empty                          shift and go to state 9
+
+state 7
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements . DEFAULT COLON statements RBRACE
+
+    DEFAULT         shift and go to state 11
+
+
+state 8
+
+    (2) case_statements -> case_statement . case_statements
+    (2) case_statements -> . case_statement case_statements
+    (3) case_statements -> . empty
+    (4) case_statement -> . CASE CONSTANT COLON statements
+    (14) empty -> .
+
+    CASE            shift and go to state 10
+    DEFAULT         reduce using rule 14 (empty -> .)
+
+    case_statement                 shift and go to state 8
+    case_statements                shift and go to state 12
+    empty                          shift and go to state 9
+
+state 9
+
+    (3) case_statements -> empty .
+
+    DEFAULT         reduce using rule 3 (case_statements -> empty .)
+
+
+state 10
+
+    (4) case_statement -> CASE . CONSTANT COLON statements
+
+    CONSTANT        shift and go to state 13
+
+
+state 11
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT . COLON statements RBRACE
+
+    COLON           shift and go to state 14
+
+
+state 12
+
+    (2) case_statements -> case_statement case_statements .
+
+    DEFAULT         reduce using rule 2 (case_statements -> case_statement case_statements .)
+
+
+state 13
+
+    (4) case_statement -> CASE CONSTANT . COLON statements
+
+    COLON           shift and go to state 15
+
+
+state 14
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON . statements RBRACE
+    (5) statements -> . statement statements
+    (6) statements -> . empty
+    (7) statement -> . BREAK SEMICOLON
+    (8) statement -> . other_statements
+    (14) empty -> .
+    (9) other_statements -> . CONSTANT SEMICOLON
+    (10) other_statements -> . expression SEMICOLON
+    (11) expression -> . NUMBER
+    (12) expression -> . BOOLEAN
+    (13) expression -> . ID
+
+    BREAK           shift and go to state 20
+    RBRACE          reduce using rule 14 (empty -> .)
+    CONSTANT        shift and go to state 16
+    NUMBER          shift and go to state 23
+    BOOLEAN         shift and go to state 24
+    ID              shift and go to state 25
+
+    statements                     shift and go to state 17
+    statement                      shift and go to state 18
+    empty                          shift and go to state 19
+    other_statements               shift and go to state 21
+    expression                     shift and go to state 22
+
+state 15
+
+    (4) case_statement -> CASE CONSTANT COLON . statements
+    (5) statements -> . statement statements
+    (6) statements -> . empty
+    (7) statement -> . BREAK SEMICOLON
+    (8) statement -> . other_statements
+    (14) empty -> .
+    (9) other_statements -> . CONSTANT SEMICOLON
+    (10) other_statements -> . expression SEMICOLON
+    (11) expression -> . NUMBER
+    (12) expression -> . BOOLEAN
+    (13) expression -> . ID
+
+    BREAK           shift and go to state 20
+    CASE            reduce using rule 14 (empty -> .)
+    DEFAULT         reduce using rule 14 (empty -> .)
+    CONSTANT        shift and go to state 16
+    NUMBER          shift and go to state 23
+    BOOLEAN         shift and go to state 24
+    ID              shift and go to state 25
+
+    statements                     shift and go to state 26
+    statement                      shift and go to state 18
+    empty                          shift and go to state 19
+    other_statements               shift and go to state 21
+    expression                     shift and go to state 22
+
+state 16
+
+    (9) other_statements -> CONSTANT . SEMICOLON
+
+    SEMICOLON       shift and go to state 27
+
+
+state 17
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements . RBRACE
+
+    RBRACE          shift and go to state 28
+
+
+state 18
+
+    (5) statements -> statement . statements
+    (5) statements -> . statement statements
+    (6) statements -> . empty
+    (7) statement -> . BREAK SEMICOLON
+    (8) statement -> . other_statements
+    (14) empty -> .
+    (9) other_statements -> . CONSTANT SEMICOLON
+    (10) other_statements -> . expression SEMICOLON
+    (11) expression -> . NUMBER
+    (12) expression -> . BOOLEAN
+    (13) expression -> . ID
+
+    BREAK           shift and go to state 20
+    RBRACE          reduce using rule 14 (empty -> .)
+    CASE            reduce using rule 14 (empty -> .)
+    DEFAULT         reduce using rule 14 (empty -> .)
+    CONSTANT        shift and go to state 16
+    NUMBER          shift and go to state 23
+    BOOLEAN         shift and go to state 24
+    ID              shift and go to state 25
+
+    statement                      shift and go to state 18
+    statements                     shift and go to state 29
+    empty                          shift and go to state 19
+    other_statements               shift and go to state 21
+    expression                     shift and go to state 22
+
+state 19
+
+    (6) statements -> empty .
+
+    RBRACE          reduce using rule 6 (statements -> empty .)
+    CASE            reduce using rule 6 (statements -> empty .)
+    DEFAULT         reduce using rule 6 (statements -> empty .)
+
+
+state 20
+
+    (7) statement -> BREAK . SEMICOLON
+
+    SEMICOLON       shift and go to state 30
+
+
+state 21
+
+    (8) statement -> other_statements .
+
+    BREAK           reduce using rule 8 (statement -> other_statements .)
+    CONSTANT        reduce using rule 8 (statement -> other_statements .)
+    NUMBER          reduce using rule 8 (statement -> other_statements .)
+    BOOLEAN         reduce using rule 8 (statement -> other_statements .)
+    ID              reduce using rule 8 (statement -> other_statements .)
+    RBRACE          reduce using rule 8 (statement -> other_statements .)
+    CASE            reduce using rule 8 (statement -> other_statements .)
+    DEFAULT         reduce using rule 8 (statement -> other_statements .)
+
+
+state 22
+
+    (10) other_statements -> expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 31
+
+
+state 23
+
+    (11) expression -> NUMBER .
+
+    SEMICOLON       reduce using rule 11 (expression -> NUMBER .)
+
+
+state 24
+
+    (12) expression -> BOOLEAN .
+
+    SEMICOLON       reduce using rule 12 (expression -> BOOLEAN .)
+
+
+state 25
+
+    (13) expression -> ID .
+
+    SEMICOLON       reduce using rule 13 (expression -> ID .)
+
+
+state 26
+
+    (4) case_statement -> CASE CONSTANT COLON statements .
+
+    CASE            reduce using rule 4 (case_statement -> CASE CONSTANT COLON statements .)
+    DEFAULT         reduce using rule 4 (case_statement -> CASE CONSTANT COLON statements .)
+
+
+state 27
+
+    (9) other_statements -> CONSTANT SEMICOLON .
+
+    BREAK           reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    CONSTANT        reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    NUMBER          reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    BOOLEAN         reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    ID              reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    RBRACE          reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    CASE            reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+    DEFAULT         reduce using rule 9 (other_statements -> CONSTANT SEMICOLON .)
+
+
+state 28
+
+    (1) switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE .
+
+    $end            reduce using rule 1 (switch_statement -> SWITCH LPAREN CONSTANT RPAREN LBRACE case_statements DEFAULT COLON statements RBRACE .)
+
+
+state 29
+
+    (5) statements -> statement statements .
+
+    RBRACE          reduce using rule 5 (statements -> statement statements .)
+    CASE            reduce using rule 5 (statements -> statement statements .)
+    DEFAULT         reduce using rule 5 (statements -> statement statements .)
+
+
+state 30
+
+    (7) statement -> BREAK SEMICOLON .
+
+    BREAK           reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    CONSTANT        reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    NUMBER          reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    BOOLEAN         reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    ID              reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    RBRACE          reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    CASE            reduce using rule 7 (statement -> BREAK SEMICOLON .)
+    DEFAULT         reduce using rule 7 (statement -> BREAK SEMICOLON .)
+
+
+state 31
+
+    (10) other_statements -> expression SEMICOLON .
+
+    BREAK           reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    CONSTANT        reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    NUMBER          reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    BOOLEAN         reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    ID              reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    RBRACE          reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    CASE            reduce using rule 10 (other_statements -> expression SEMICOLON .)
+    DEFAULT         reduce using rule 10 (other_statements -> expression SEMICOLON .)
+

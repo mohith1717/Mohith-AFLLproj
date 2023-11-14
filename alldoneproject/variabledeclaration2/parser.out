@@ -1,0 +1,121 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> variable_declaration SEMICOLON
+Rule 2     variable_declaration -> type IDENTIFIER
+Rule 3     type -> INT_TYPE
+Rule 4     type -> FLOAT_TYPE
+Rule 5     type -> STRING_TYPE
+Rule 6     type -> BOOL_TYPE
+Rule 7     type -> CHAR_TYPE
+
+Terminals, with rules where they appear
+
+BOOL_TYPE            : 6
+CHAR_TYPE            : 7
+FLOAT_TYPE           : 4
+IDENTIFIER           : 2
+INT_TYPE             : 3
+SEMICOLON            : 1
+STRING_TYPE          : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+statement            : 0
+type                 : 2
+variable_declaration : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . variable_declaration SEMICOLON
+    (2) variable_declaration -> . type IDENTIFIER
+    (3) type -> . INT_TYPE
+    (4) type -> . FLOAT_TYPE
+    (5) type -> . STRING_TYPE
+    (6) type -> . BOOL_TYPE
+    (7) type -> . CHAR_TYPE
+
+    INT_TYPE        shift and go to state 4
+    FLOAT_TYPE      shift and go to state 5
+    STRING_TYPE     shift and go to state 6
+    BOOL_TYPE       shift and go to state 7
+    CHAR_TYPE       shift and go to state 8
+
+    statement                      shift and go to state 1
+    variable_declaration           shift and go to state 2
+    type                           shift and go to state 3
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> variable_declaration . SEMICOLON
+
+    SEMICOLON       shift and go to state 9
+
+
+state 3
+
+    (2) variable_declaration -> type . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 10
+
+
+state 4
+
+    (3) type -> INT_TYPE .
+
+    IDENTIFIER      reduce using rule 3 (type -> INT_TYPE .)
+
+
+state 5
+
+    (4) type -> FLOAT_TYPE .
+
+    IDENTIFIER      reduce using rule 4 (type -> FLOAT_TYPE .)
+
+
+state 6
+
+    (5) type -> STRING_TYPE .
+
+    IDENTIFIER      reduce using rule 5 (type -> STRING_TYPE .)
+
+
+state 7
+
+    (6) type -> BOOL_TYPE .
+
+    IDENTIFIER      reduce using rule 6 (type -> BOOL_TYPE .)
+
+
+state 8
+
+    (7) type -> CHAR_TYPE .
+
+    IDENTIFIER      reduce using rule 7 (type -> CHAR_TYPE .)
+
+
+state 9
+
+    (1) statement -> variable_declaration SEMICOLON .
+
+    $end            reduce using rule 1 (statement -> variable_declaration SEMICOLON .)
+
+
+state 10
+
+    (2) variable_declaration -> type IDENTIFIER .
+
+    SEMICOLON       reduce using rule 2 (variable_declaration -> type IDENTIFIER .)
+

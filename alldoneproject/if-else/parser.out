@@ -1,0 +1,302 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NUMBER
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> statements
+Rule 2     statements -> statement statements
+Rule 3     statements -> empty
+Rule 4     statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+Rule 5     statement -> ID EQUALS expression SEMICOLON
+Rule 6     expression -> expression GT expression
+Rule 7     expression -> BOOLEAN
+Rule 8     expression -> ID
+Rule 9     empty -> <empty>
+
+Terminals, with rules where they appear
+
+BOOLEAN              : 7
+ELSE                 : 4
+EQUALS               : 5
+GT                   : 6
+ID                   : 5 8
+IF                   : 4
+LBRACE               : 4 4
+LPAREN               : 4
+NUMBER               : 
+RBRACE               : 4 4
+RPAREN               : 4
+SEMICOLON            : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+empty                : 3
+expression           : 4 5 6 6
+start                : 0
+statement            : 2
+statements           : 1 2 4 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . statements
+    (2) statements -> . statement statements
+    (3) statements -> . empty
+    (4) statement -> . IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (5) statement -> . ID EQUALS expression SEMICOLON
+    (9) empty -> .
+
+    IF              shift and go to state 5
+    ID              shift and go to state 6
+    $end            reduce using rule 9 (empty -> .)
+
+    start                          shift and go to state 1
+    statements                     shift and go to state 2
+    statement                      shift and go to state 3
+    empty                          shift and go to state 4
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (1) start -> statements .
+
+    $end            reduce using rule 1 (start -> statements .)
+
+
+state 3
+
+    (2) statements -> statement . statements
+    (2) statements -> . statement statements
+    (3) statements -> . empty
+    (4) statement -> . IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (5) statement -> . ID EQUALS expression SEMICOLON
+    (9) empty -> .
+
+    IF              shift and go to state 5
+    ID              shift and go to state 6
+    $end            reduce using rule 9 (empty -> .)
+    RBRACE          reduce using rule 9 (empty -> .)
+
+    statement                      shift and go to state 3
+    statements                     shift and go to state 7
+    empty                          shift and go to state 4
+
+state 4
+
+    (3) statements -> empty .
+
+    $end            reduce using rule 3 (statements -> empty .)
+    RBRACE          reduce using rule 3 (statements -> empty .)
+
+
+state 5
+
+    (4) statement -> IF . LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 8
+
+
+state 6
+
+    (5) statement -> ID . EQUALS expression SEMICOLON
+
+    EQUALS          shift and go to state 9
+
+
+state 7
+
+    (2) statements -> statement statements .
+
+    $end            reduce using rule 2 (statements -> statement statements .)
+    RBRACE          reduce using rule 2 (statements -> statement statements .)
+
+
+state 8
+
+    (4) statement -> IF LPAREN . expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (6) expression -> . expression GT expression
+    (7) expression -> . BOOLEAN
+    (8) expression -> . ID
+
+    BOOLEAN         shift and go to state 11
+    ID              shift and go to state 12
+
+    expression                     shift and go to state 10
+
+state 9
+
+    (5) statement -> ID EQUALS . expression SEMICOLON
+    (6) expression -> . expression GT expression
+    (7) expression -> . BOOLEAN
+    (8) expression -> . ID
+
+    BOOLEAN         shift and go to state 11
+    ID              shift and go to state 12
+
+    expression                     shift and go to state 13
+
+state 10
+
+    (4) statement -> IF LPAREN expression . RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (6) expression -> expression . GT expression
+
+    RPAREN          shift and go to state 14
+    GT              shift and go to state 15
+
+
+state 11
+
+    (7) expression -> BOOLEAN .
+
+    RPAREN          reduce using rule 7 (expression -> BOOLEAN .)
+    GT              reduce using rule 7 (expression -> BOOLEAN .)
+    SEMICOLON       reduce using rule 7 (expression -> BOOLEAN .)
+
+
+state 12
+
+    (8) expression -> ID .
+
+    RPAREN          reduce using rule 8 (expression -> ID .)
+    GT              reduce using rule 8 (expression -> ID .)
+    SEMICOLON       reduce using rule 8 (expression -> ID .)
+
+
+state 13
+
+    (5) statement -> ID EQUALS expression . SEMICOLON
+    (6) expression -> expression . GT expression
+
+    SEMICOLON       shift and go to state 16
+    GT              shift and go to state 15
+
+
+state 14
+
+    (4) statement -> IF LPAREN expression RPAREN . LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 17
+
+
+state 15
+
+    (6) expression -> expression GT . expression
+    (6) expression -> . expression GT expression
+    (7) expression -> . BOOLEAN
+    (8) expression -> . ID
+
+    BOOLEAN         shift and go to state 11
+    ID              shift and go to state 12
+
+    expression                     shift and go to state 18
+
+state 16
+
+    (5) statement -> ID EQUALS expression SEMICOLON .
+
+    IF              reduce using rule 5 (statement -> ID EQUALS expression SEMICOLON .)
+    ID              reduce using rule 5 (statement -> ID EQUALS expression SEMICOLON .)
+    $end            reduce using rule 5 (statement -> ID EQUALS expression SEMICOLON .)
+    RBRACE          reduce using rule 5 (statement -> ID EQUALS expression SEMICOLON .)
+
+
+state 17
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE . statements RBRACE ELSE LBRACE statements RBRACE
+    (2) statements -> . statement statements
+    (3) statements -> . empty
+    (4) statement -> . IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (5) statement -> . ID EQUALS expression SEMICOLON
+    (9) empty -> .
+
+    IF              shift and go to state 5
+    ID              shift and go to state 6
+    RBRACE          reduce using rule 9 (empty -> .)
+
+    statements                     shift and go to state 19
+    statement                      shift and go to state 3
+    empty                          shift and go to state 4
+
+state 18
+
+    (6) expression -> expression GT expression .
+    (6) expression -> expression . GT expression
+
+  ! shift/reduce conflict for GT resolved as shift
+    RPAREN          reduce using rule 6 (expression -> expression GT expression .)
+    SEMICOLON       reduce using rule 6 (expression -> expression GT expression .)
+    GT              shift and go to state 15
+
+  ! GT              [ reduce using rule 6 (expression -> expression GT expression .) ]
+
+
+state 19
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE statements . RBRACE ELSE LBRACE statements RBRACE
+
+    RBRACE          shift and go to state 20
+
+
+state 20
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE . ELSE LBRACE statements RBRACE
+
+    ELSE            shift and go to state 21
+
+
+state 21
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 22
+
+
+state 22
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE . statements RBRACE
+    (2) statements -> . statement statements
+    (3) statements -> . empty
+    (4) statement -> . IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (5) statement -> . ID EQUALS expression SEMICOLON
+    (9) empty -> .
+
+    IF              shift and go to state 5
+    ID              shift and go to state 6
+    RBRACE          reduce using rule 9 (empty -> .)
+
+    statements                     shift and go to state 23
+    statement                      shift and go to state 3
+    empty                          shift and go to state 4
+
+state 23
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements . RBRACE
+
+    RBRACE          shift and go to state 24
+
+
+state 24
+
+    (4) statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .
+
+    IF              reduce using rule 4 (statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    ID              reduce using rule 4 (statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    $end            reduce using rule 4 (statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 4 (statement -> IF LPAREN expression RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for GT in state 18 resolved as shift
